@@ -914,7 +914,7 @@ void HikCameraSync::GetFrameWorkThread() {
                     std::to_string(std::chrono::duration_cast<NS>(image_rcv_time.time_since_epoch()).count()) + "], Width: [" +
                     std::to_string(stFrameOut.stFrameInfo.nWidth) + "], Height: [" +
                     std::to_string(stFrameOut.stFrameInfo.nHeight) + "], nFrameLen: [" +
-                    std::to_string(stFrameOut.stFrameInfo.nFrameLen)+ "]";
+                    std::to_string(stFrameOut.stFrameInfo.nFrameLen)+ "]\n";
         ROS_INFO_STREAM(debug_msg.c_str());
 
 
@@ -955,7 +955,7 @@ void HikCameraSync::QueueProcessWorkThread() {
         static uint64_t last_time_stamp = 0;
         static CLK::time_point last_rcv_time;
 
-        if (queue_.size() < freq_ / 10) {
+        if (queue_.size() < freq_ / 5) {
             // ROS_WARN("Wait for queue size to %d!", freq_ / 10);
             std::this_thread::sleep_for(std::chrono::nanoseconds(ideal_interval_.count()));
             continue;
